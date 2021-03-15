@@ -1,0 +1,43 @@
+\documentclass{article}
+
+\begin{document}
+
+\section{Introducci\'on}
+
+Este es un ejemplo de documento latex que incorpora datos procesados mediante R y \textit{knitr}.
+
+\section{An\'alisis de datos}
+
+<<cargar_datos, echo=FALSE, hide=TRUE>>=
+library(xlsx)
+expdata <- read.xlsx("dataset.xlsx", 1)
+expdata$STRATEGY <- factor(expdata$STRATEGY, c("YW", "ITLD", "TDD"))
+options(digits=2)
+@
+
+Los datos no son visibles. S\'olo existen durante el procesamiento. No ocurre lo mismo con los gr\'aficos, que si que se ven, como se muestra en la Fig.~\ref{fig1}.
+
+\begin{figure}[h]
+\centering
+<<boxplot, hide=TRUE, echo=FALSE, fig=TRUE, out.width = '50%'>>=
+with(expdata,
+     boxplot(QLTY ~ STRATEGY)
+)
+@
+\caption{Ejemplo de box-plot}
+\label{fig1}
+\end{figure}
+
+De la misma forma, los an\'alisis se pueden visualizar, aunque necesitan de alg\'un software adicional para formatearlas correctamente, tal y como se muestra en la Tabla~\ref{tab1}.
+
+<<analisis, hide=TRUE, echo=FALSE, results='asis'>>=
+library(xtable)
+analisis<-aov(QLTY ~ STRATEGY, data=expdata)
+xtable(summary(analisis), caption="Ejemplo de an\\'alisis", label="tab1")
+@
+
+\section{Conclusi\'on}
+
+Hay que almacenar los datos...
+
+\end{document}
