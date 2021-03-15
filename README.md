@@ -1,0 +1,1 @@
+# ejemplo-procesamiento-knitr-latex
