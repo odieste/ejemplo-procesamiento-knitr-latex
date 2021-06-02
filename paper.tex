@@ -49,6 +49,11 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
+
+\usepackage{placeins}
+
+
+
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -76,15 +81,15 @@ Los datos no son visibles. S\'olo existen durante el procesamiento. No ocurre lo
 De la misma forma, los an\'alisis se pueden visualizar, aunque necesitan de alg\'un software adicional para formatearlas correctamente, tal y como se muestra en la Tabla~\ref{tab1}.
 
 % latex table generated in R 4.0.3 by xtable 1.8-4 package
-% Mon Mar 15 09:30:04 2021
+% Wed Jun  2 12:35:38 2021
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrr}
   \hline
  & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
   \hline
-STRATEGY    & 2 & 2841.32 & 1420.66 & 0.98 & 0.3818 \\ 
-  Residuals   & 53 & 76795.46 & 1448.97 &  &  \\ 
+STRATEGY    & 2 & 2244.65 & 1122.32 & 47.22 & 0.0002 \\ 
+  Residuals   & 6 & 142.61 & 23.77 &  &  \\ 
    \hline
 \end{tabular}
 \caption{Ejemplo de an\'alisis} 
@@ -95,5 +100,42 @@ STRATEGY    & 2 & 2841.32 & 1420.66 & 0.98 & 0.3818 \\
 \section{Conclusi\'on}
 
 Hay que almacenar los datos...
+
+\FloatBarrier
+
+\appendix
+
+\section{Data tables}
+
+Una posibilidad, que por cierto no se usa mucho, es guardar los datos en un anexo. El resultado es esta tabla que aparece en anexo. Un paso adelante, pero insatisfactorio.
+
+\vspace{1cm}
+
+
+\begin{tabular}{l|l|l|r}
+\hline
+STRATEGY & GROUP & TASK & Productivity\\
+\hline
+YW & G1 & MR & 14.1\\
+\hline
+YW & G2 & SS & 18.3\\
+\hline
+YW & G3 & BSK & 21.0\\
+\hline
+ITLD & G1 & BSK & 35.5\\
+\hline
+ITLD & G2 & MR & 44.4\\
+\hline
+ITLD & G3 & SS & 50.1\\
+\hline
+TDD & G1 & SS & 3.2\\
+\hline
+TDD & G2 & BSK & 5.3\\
+\hline
+TDD & G3 & MR & 7.7\\
+\hline
+\end{tabular}
+
+
 
 \end{document}

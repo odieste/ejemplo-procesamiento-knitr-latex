@@ -1,5 +1,11 @@
 \documentclass{article}
 
+\usepackage{placeins}
+
+<<hide=TRUE, echo=FALSE>>=
+options(knitr.table.format = "latex")
+@
+
 \begin{document}
 
 \section{Introducci\'on}
@@ -11,7 +17,12 @@ Este es un ejemplo de documento latex que incorpora datos procesados mediante R 
 <<cargar_datos, echo=FALSE, hide=TRUE>>=
 library(xlsx)
 expdata <- read.xlsx("dataset.xlsx", 1)
-expdata$STRATEGY <- factor(expdata$STRATEGY, c("YW", "ITLD", "TDD"))
+
+# Factores, o variables independientes nominales
+expdata$STRATEGY <- factor(expdata$STRATEGY, c("YW", "ITLD", "TDD"), ordered=TRUE)
+expdata$TASK <- factor(expdata$TASK, c("SS", "MR", "BSK"))
+expdata$GROUP <- factor(expdata$GROUP, c("G1", "G2", "G3"))
+
 options(digits=2)
 @
 
@@ -21,7 +32,7 @@ Los datos no son visibles. S\'olo existen durante el procesamiento. No ocurre lo
 \centering
 <<boxplot, hide=TRUE, echo=FALSE, fig=TRUE, out.width = '50%'>>=
 with(expdata,
-     boxplot(QLTY ~ STRATEGY)
+     boxplot(Productivity ~ STRATEGY)
 )
 @
 \caption{Ejemplo de box-plot}
@@ -32,12 +43,26 @@ De la misma forma, los an\'alisis se pueden visualizar, aunque necesitan de alg\
 
 <<analisis, hide=TRUE, echo=FALSE, results='asis'>>=
 library(xtable)
-analisis<-aov(QLTY ~ STRATEGY, data=expdata)
+analisis<-aov(Productivity ~ STRATEGY, data=expdata)
 xtable(summary(analisis), caption="Ejemplo de an\\'alisis", label="tab1")
 @
 
 \section{Conclusi\'on}
 
 Hay que almacenar los datos...
+
+\FloatBarrier
+
+\appendix
+
+\section{Data tables}
+
+Una posibilidad, que por cierto no se usa mucho, es guardar los datos en un anexo. El resultado es esta tabla que aparece en anexo. Un paso adelante, pero insatisfactorio.
+
+\vspace{1cm}
+
+<<generarTabla, hide=TRUE, echo=FALSE, results='asis'>>=
+kable(expdata)
+@
 
 \end{document}

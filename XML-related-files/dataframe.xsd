@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://grise.upm.es/2021/R/dataframe" elementFormDefault="qualified">
+
+  <xs:element name="dataframe">
+    <xs:annotation>
+      <xs:documentation>A dataframe is an unbounded sequence of columns. A dataframe without columns is possible.</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexType>
+
+      <xs:sequence>
+
+        <xs:element name="column" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>A column has a type and is made of values. Zero values are possible.</xs:documentation>
+          </xs:annotation>
+
+          <xs:complexType>
+
+            <xs:sequence>
+              <xs:element name="value" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            
+            <xs:attribute name="name" type="xs:string" use="required"/>
+
+            <xs:attribute name="type">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="nominal"/>
+                  <xs:enumeration value="ordinal"/>
+                  <xs:enumeration value="interval"/>
+                  <xs:enumeration value="ratio"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+
+          </xs:complexType>
+        </xs:element>
+
+      </xs:sequence>
+
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

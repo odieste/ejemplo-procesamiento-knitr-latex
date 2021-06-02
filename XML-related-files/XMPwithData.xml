@@ -1,0 +1,50 @@
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.0-c316 44.253921, Sun Oct 01 2006 17:14:39">
+	<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+			 xmlns:pdfx="ns.adobe.org/pdfx/1.3/">
+         <rdf:Description rdf:about="paper URI here">
+			<pdfx:Dataframe>
+<![CDATA[
+<?xml version="1.0"?>
+	<dataframe name="expData" 
+		xmlns="http://grise.upm.es/2021/R/dataframe"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://grise.upm.es/2021/R/dataframe http://grise.upm.es/dataframe.xsd">
+		<column name="STRATEGY" type="nominal">
+			<value>MR</value>
+			<value>MR</value>
+			<value>MR</value>
+			<value>BSK</value>
+			<value>BSK</value>
+			<value>BSK</value>
+			<value>SS</value>
+			<value>SS</value>
+			<value>SS</value>
+		</column>
+		<column name="GROUP" type="ordinal">
+			<value>G1</value>
+			<value>G2</value>
+			<value>G3</value>
+			<value>G1</value>
+			<value>G2</value>
+			<value>G3</value>
+			<value>G1</value>
+			<value>G2</value>
+			<value>G3</value>
+		</column>
+		<column name="Productivity" type="ratio">
+			<value>14.1</value>
+			<value>18.3</value>
+			<value>21.0</value>
+			<value>35.5</value>
+			<value>44.4</value>
+			<value>50.1</value>
+			<value>3.2</value>
+			<value>5.3</value>
+			<value>7.7</value>
+		</column>
+	</dataframe>
+]]>
+			</pdfx:Dataframe>
+      </rdf:Description>
+   </rdf:RDF>
+</x:xmpmeta>

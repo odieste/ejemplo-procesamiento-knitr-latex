@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<dataframe xmlns="http://grise.upm.es/2021/R/dataframe" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="expData" xsi:schemaLocation="http://grise.upm.es/2021/R/dataframe http://grise.upm.es/dataframe.xsd">
+  <column name="STRATEGY" type="nominal">
+    <value>MR</value>
+    <value>MR</value>
+    <value>MR</value>
+    <value>BSK</value>
+    <value>BSK</value>
+    <value>BSK</value>
+    <value>SS</value>
+    <value>SS</value>
+    <value>SS</value>
+  </column>
+  <column name="GROUP" type="ordinal">
+    <value>G1</value>
+    <value>G2</value>
+    <value>G3</value>
+    <value>G1</value>
+    <value>G2</value>
+    <value>G3</value>
+    <value>G1</value>
+    <value>G2</value>
+    <value>G3</value>
+  </column>
+  <column name="Productivity" type="ratio">
+    <value>14.1</value>
+    <value>18.3</value>
+    <value>21.0</value>
+    <value>35.5</value>
+    <value>44.4</value>
+    <value>50.1</value>
+    <value>3.2</value>
+    <value>5.3</value>
+    <value>7.7</value>
+  </column>
+</dataframe>
