@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\usepackage[a-1b]{pdfx}
+
+<<hide=TRUE, echo=FALSE>>=
+options(knitr.table.format = "latex")
+library(xlsx)
+expdata <- read.xlsx("dataset.xlsx", 1)
+
+# Factors, that is, nominal independent variables
+# In some cases, we can add an ordinal character as in this case
+expdata$STRATEGY <- factor(expdata$STRATEGY, c("YW", "ITLD", "TDD"), ordered=TRUE)
+expdata$TASK <- factor(expdata$TASK, c("SS", "MR", "BSK"))
+expdata$GROUP <- factor(expdata$GROUP, c("G1", "G2", "G3"))
+
+options(digits=2)
+@
+
+<<Store XMP, hide=TRUE, echo=FALSE, results='asis'>>=
+fileName <- "XML-related-files/dataframe.xml"
+xmpString <- readChar(fileName, file.info(fileName)$size)
+xmpStringScaped <- gsub("\\\\","\\\\\\\\", xmpString)
+xmpStringforStorage <- paste("<![CDATA[", xmpStringScaped, "]]>", sep='')
+@
+
+\begin{document}
+
+Ejemplo de uso de \textbackslash pdfinfo\{\}
+
+\pdfinfo{/dataframe (\Sexpr{xmpStringforStorage})}
+
+\end{document}
