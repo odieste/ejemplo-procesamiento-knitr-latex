@@ -1,0 +1,127 @@
+\documentclass{article}
+
+\usepackage{placeins}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+<<hide=TRUE, echo=FALSE>>=
+options(knitr.table.format = "latex")
+library(xlsx)
+expdata <- read.xlsx("dataset.xlsx", 1)
+
+# Factors, that is, nominal independent variables
+# In some cases, we can add an ordinal character as in this case
+expdata$STRATEGY <- factor(expdata$STRATEGY, c("YW", "ITLD", "TDD"), ordered=TRUE)
+expdata$TASK <- factor(expdata$TASK, c("SS", "MR", "BSK"))
+expdata$GROUP <- factor(expdata$GROUP, c("G1", "G2", "G3"))
+
+options(digits=2)
+@
+
+<<Store XMP, hide=TRUE, echo=FALSE, results='asis'>>=
+fileName <- "XML-related-files/dataframe.xml"
+xmpString <- readChar(fileName, file.info(fileName)$size)
+xmpStringScaped <- gsub("\\\\","\\\\\\\\", xmpString)
+xmpStringforStorage <- paste("<![CDATA[", xmpStringScaped, "]]>", sep='')
+@
+
+\hypersetup{pdfinfo={dataframe=\Sexpr{xmpStringforStorage}}}
+
+\begin{document}
+
+\section{Introducci\'on}
+
+Este es un ejemplo de documento latex que incorpora datos procesados mediante R y \textit{knitr}.
+
+\section{An\'alisis de datos}
+
+Los datos no son visibles. S\'olo existen durante el procesamiento. No ocurre lo mismo con los gr\'aficos, que si que se ven, como se muestra en la Fig.~\ref{fig1}.
+
+\begin{figure}[ht]
+\centering
+<<boxplot, hide=TRUE, echo=FALSE, fig=TRUE, out.width = '50%'>>=
+with(expdata,
+     boxplot(Productivity ~ STRATEGY)
+)
+@
+\caption{Ejemplo de box-plot}
+\label{fig1}
+\end{figure}
+
+De la misma forma, los an\'alisis se pueden visualizar, aunque necesitan de alg\'un software adicional para formatearlas correctamente, tal y como se muestra en la Tabla~\ref{tab1}.
+
+<<analisis, hide=TRUE, echo=FALSE, results='asis'>>=
+library(xtable)
+analisis<-aov(Productivity ~ STRATEGY, data=expdata)
+xtable(summary(analisis), caption="Ejemplo de an\\'alisis", label="tab1")
+@
+
+\section{Conclusi\'on}
+
+Hay que almacenar los datos \dots
+
+Este fichero representa una posibilidad: ... \textcolor{red}{Decir como se hace}
+
+Ventajas:
+\begin{itemize}
+
+\item Los datos pueden visualizarse con cualquier herramienta, ej: Acrobat Reader, como puede observarse en la Fig.~\ref{fig:Option1VisibleAcrobatReader}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=4in]{figure/Option1VisibleAcrobatReader}
+\caption{Los datos, mostrados en Acrobat Reader}
+\label{fig:Option1VisibleAcrobatReader}
+\end{figure}
+
+\
+
+\end{itemize}
+
+Desventajas:
+\begin{itemize}
+
+\item Se necesitan herramientas como Adobe Adrobat para poder acceder a los datos. Acrobat Reader visualiza los datos, pero no permite su extracción. Adobre Acrobat si lo permite, como puede observarse en la Fig.~\ref{fig:Option1VisibleAdobeAcrobat}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=4in]{figure/Option1VisibleAdobeAcrobat}
+\caption{Los datos, mostrados en Adobe Acrobat}
+\label{fig:Option1VisibleAdobeAcrobat}
+\end{figure}
+
+\item Ahora bien, dichas herramientas están ampliamente disponibles. Por exemplo, el editor FoxIt, bien conocido en Windows, permite obtener los datos de forma sencilla, como se observa en la Fig.~\ref{fig:Option1VisibleFoxit}. Curiosamente, la aplicación \textit{Preview} instalada en los ordenadores con iOS no permite, hasta donde alcanzamos, obtener los datos.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=3in]{figure/Option1VisibleFoxit}
+\caption{Los datos, mostrados en Foxit (online)}
+\label{fig:Option1VisibleFoxit}
+\end{figure}
+
+\item Existen multiples APIs...
+
+% \begin{figure}[ht]
+% \centering
+% \includegraphics[width=3in]{}
+% \caption{}
+% \label{fig:}
+% \end{figure}
+
+\end{itemize}
+
+\FloatBarrier
+
+\appendix
+
+\section{Data tables}
+
+Una posibilidad, que por cierto no se usa mucho, es guardar los datos en un anexo. El resultado es esta tabla que aparece en anexo. Un paso adelante, pero insatisfactorio.
+
+\vspace{1cm}
+
+<<generarTabla, hide=TRUE, echo=FALSE, results='asis'>>=
+kable(expdata)
+@
+
+\end{document}
