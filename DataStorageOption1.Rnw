@@ -1,8 +1,10 @@
 \documentclass{article}
 
-\usepackage{placeins}
-\usepackage{hyperref}
 \usepackage{xcolor}
+\usepackage{placeins}
+\usepackage[T1]{fontenc}
+\usepackage{colorprofiles}
+\usepackage[a-2b,mathxmp]{pdfx}[2018/12/22]
 
 <<hide=TRUE, echo=FALSE>>=
 options(knitr.table.format = "latex")
@@ -18,14 +20,22 @@ expdata$GROUP <- factor(expdata$GROUP, c("G1", "G2", "G3"))
 options(digits=2)
 @
 
-<<Store XMP, hide=TRUE, echo=FALSE, results='asis'>>=
+<<hide=TRUE, echo=FALSE>>=
 fileName <- "XML-related-files/dataframe.xml"
 xmpString <- readChar(fileName, file.info(fileName)$size)
 xmpStringScaped <- gsub("\\\\","\\\\\\\\", xmpString)
 xmpStringforStorage <- paste("<![CDATA[", xmpStringScaped, "]]>", sep='')
 @
 
-\hypersetup{pdfinfo={dataframe=\Sexpr{xmpStringforStorage}}}
+\hypersetup{
+   pdftitle = {Document’s title},
+   pdfauthor = {Author’s name},
+   pdflang = {es-ES},
+   pdfsubject = {The abstract, or short description.},
+   pdfkeywords = {keyword1, keyword2, keyword3},
+   pdfstartview={},
+   pdfinfo={dataframe=\Sexpr{xmpStringforStorage}}
+}
 
 \begin{document}
 
@@ -60,6 +70,10 @@ xtable(summary(analisis), caption="Ejemplo de an\\'alisis", label="tab1")
 
 Hay que almacenar los datos \dots
 
+Utilizamos PDF/A porque nos interesa que los documentos PDF puedan conservarse largo tiempo. No queremos usar opciones que limiten la capacidad de archivo.
+
+Aquí se dice como... \url{https://webpages.tuni.fi/latex/pdfa-guide.pdf}. En esta variante quiero usar exclusivamente hyperref, por lo que cedo todos los datos a hypersetup sin usar un ficheroe externo.
+
 Este fichero representa una posibilidad: ... \textcolor{red}{Decir como se hace}
 
 Ventajas:
@@ -74,14 +88,7 @@ Ventajas:
 \label{fig:Option1VisibleAcrobatReader}
 \end{figure}
 
-\
-
-\end{itemize}
-
-Desventajas:
-\begin{itemize}
-
-\item Se necesitan herramientas como Adobe Adrobat para poder acceder a los datos. Acrobat Reader visualiza los datos, pero no permite su extracción. Adobre Acrobat si lo permite, como puede observarse en la Fig.~\ref{fig:Option1VisibleAdobeAcrobat}.
+\item Sin embargo, se necesitan herramientas como Adobe Adrobat para poder acceder a los datos. Acrobat Reader visualiza los datos, pero no permite su extracción. Adobre Acrobat si lo permite, como puede observarse en la Fig.~\ref{fig:Option1VisibleAdobeAcrobat}.
 
 \begin{figure}[ht]
 \centering
@@ -101,12 +108,14 @@ Desventajas:
 
 \item Existen multiples APIs...
 
-% \begin{figure}[ht]
-% \centering
-% \includegraphics[width=3in]{}
-% \caption{}
-% \label{fig:}
-% \end{figure}
+\end{itemize}
+
+Desventajas:
+\begin{itemize}
+
+\item \textbackslash hypersetup\{\} sólo se puede usar en el preámbulo, lo que es un problema, ya que los datos pueden estar disponibles al principio o no (bien es cierto que típicamente si lo están).
+
+\item Lo que ya no parece posible es almacenar datos que correspondan a distintos estadios ... \textcolor{red}{Completar}.
 
 \end{itemize}
 
