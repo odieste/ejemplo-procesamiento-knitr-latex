@@ -22,9 +22,7 @@ xmpStringScaped <- gsub("\\\\","\\\\\\\\", xmpString)
 xmpStringforStorage <- paste("<![CDATA[", xmpStringScaped, "]]>", sep='')
 @
 
-\immediate\pdfobj stream
-    attr {/Dataframe (expData)}
-    {\Sexpr{xmpStringScaped}}
+\pdfinfo{/Dataframe (\Sexpr{xmpStringScaped})}
 
 \begin{document}
 

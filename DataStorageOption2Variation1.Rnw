@@ -1,7 +1,8 @@
 \documentclass{article}
 
 \usepackage[margin=1in]{geometry}
-\usepackage[a-2b,mathxmp]{pdfx}[2018/12/22]
+%\usepackage[a-2b,mathxmp]{pdfx}[2018/12/22]
+\usepackage[pdfa]{hyperref} % Al usar pdfx, los datos no se almacenan en el PDF
 
 <<hide=TRUE, echo=FALSE>>=
 expdata <- read.csv("dataset.csv", 1)
@@ -22,9 +23,9 @@ xmpStringScaped <- gsub("\\\\","\\\\\\\\", xmpString)
 xmpStringforStorage <- paste("<![CDATA[", xmpStringScaped, "]]>", sep='')
 @
 
-\immediate\pdfobj stream
-    attr {/Dataframe (expData)}
-    {\Sexpr{xmpStringScaped}}
+\hypersetup{
+   pdfinfo={Dataframe=\Sexpr{xmpStringScaped}}
+}
 
 \begin{document}
 
